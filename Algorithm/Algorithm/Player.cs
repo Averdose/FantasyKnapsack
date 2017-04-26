@@ -17,6 +17,7 @@ namespace Algorithm
         private int _average;
 
         public int Average { get { return _average; } set { _average = value; } }
+        public int Cost { get { return _cost; } set { _cost = value; } }
         public Player(Random random)
         {
             _speed = random.Next(0, 100);
