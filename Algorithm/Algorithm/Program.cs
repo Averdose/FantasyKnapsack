@@ -23,7 +23,7 @@ namespace Algorithm
             int teamSize = 11;
             int budget = 55000;
             double mutationChance = 0.02;
-            int iterationCount = 1000;
+            int iterationCount = 100;
             Random random = new Random();
             Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
             Console.WriteLine("Population : {0}",populationSize);
