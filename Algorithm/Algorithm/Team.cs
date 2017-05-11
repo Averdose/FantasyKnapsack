@@ -10,12 +10,14 @@ namespace Algorithm
     {
         private Player[] _players;
         private Random _random;
+        //fitness = 0 means the budget was surpassed. = -1 means that fitness was npot yet evaluated.
         private int _fitness;
         private int _cost;
         private int _budget;
         public int Cost { get { return _cost; } }
         public Player[] Players { get { return _players; } }
         public int Fitness { get { return _fitness; } set { _fitness = value; } }
+        //creating a new team with random players
         public Team(Random random, int teamSize, int budget)
         {
             int cost = budget + 1;
@@ -29,7 +31,6 @@ namespace Algorithm
                     cost += _players[i].Cost;
                 }
             }
-            //
             _fitness = -1;
             CalculateFitness();
             _random = random;

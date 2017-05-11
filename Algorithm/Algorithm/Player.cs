@@ -18,6 +18,8 @@ namespace Algorithm
 
         public int Average { get { return _average; } set { _average = value; } }
         public int Cost { get { return _cost; } set { _cost = value; } }
+        //this player will have random values of skills
+        //in further version this data will be read from a file
         public Player(Random random)
         {
             _speed = random.Next(0, 100);
@@ -29,7 +31,8 @@ namespace Algorithm
             _average = 0;
             CalculateAverage();
         }
-
+        //each skill is treated equally so this is a simple average
+        //depending on the position respective skills can be weighted apropiately
         private void CalculateAverage()
         {
             _average = (_speed + _dribbling + _dribbling + _passing + _shooting) / 5;
