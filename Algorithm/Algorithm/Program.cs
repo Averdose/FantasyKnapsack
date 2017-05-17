@@ -19,7 +19,7 @@ namespace Algorithm
             //      mutate to create new teams
             //      remove y worst teams
             //      insert best new teams
-            int populationSize = 500;
+            int populationSize = 50000;
             int teamSize = 11;
             int budget = 55000;
             double mutationChance = 0.02;
@@ -31,11 +31,11 @@ namespace Algorithm
             Console.WriteLine("Budget : {0}", budget);
             Console.WriteLine("Mutation chance : {0}", mutationChance);
             Console.WriteLine("Iterations count : {0}", iterationCount);
-            Team winner = population.evolve(iterationCount);
+            Team winner = population.Evolve(iterationCount);
             Console.WriteLine("the winners fitness is {0} and cost is {1}", winner.Fitness, winner.Cost);
             for (int i =0; i< winner.Players.Length; i++)
             {
-                Console.WriteLine("player of winning team has fitness {0} and cost {1}", winner.Players[i].Average, winner.Players[i].Cost);
+                Console.WriteLine("player of winning team has fitness {0} and cost {1}, id: {2}", winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
             }
         }
     }

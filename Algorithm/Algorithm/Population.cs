@@ -8,6 +8,8 @@ namespace Algorithm
 {
     public class Population
     {
+        private double deletionCoef = 0.05;
+        private long _playerCount;
         private int _budget;
         private double _mutateChance;
         private List<Team> _teams;
@@ -16,37 +18,66 @@ namespace Algorithm
         public Population(int initialPopulation, Random random, int teamSize, int budget, double mutateChance)
         {
             _teams = new List<Team>();
+            _playerCount = 0;
             for(int i = 0; i < initialPopulation; i++)
             {
-                _teams.Add(new Team(random, teamSize, budget));
+                _teams.Add(new Team(random, teamSize, budget, ref _playerCount));
             }
             _random = random;
             _teamSize = teamSize;
             _budget = budget;
             _mutateChance = mutateChance;
         }
+        private int GetSamePosition(int index)
+        {
+            int indexB = 0;
 
+            if (index == 0)
+            {
+                return indexB;
+            }
+            else if (index < 5)
+            {
+                indexB = _random.Next(1, 5);
+            }
+            else if (index < 9)
+            {
+                indexB = _random.Next(5, 9);
+            }
+            else
+            {
+                indexB = _random.Next(9, 11);
+            }
+
+            return indexB;
+        }
         private Team CrossOver(Team teamA, Team teamB)
         {
-            int indexA = _random.Next(0, _teamSize - 1);
-            int indexB = _random.Next(0, _teamSize - 1);
+            int indexA = _random.Next(0, _teamSize);
+
+            int indexB = GetSamePosition(indexA);
 
             Player player = teamB.Players[indexB];
 
+            if (teamA.Players.Any(p => p.Id == player.Id))
+            {
+                return null;
+            }
             return new Team(teamA.Players, indexA, player, _random, _teamSize, _budget);
         }
 
-        public Team evolve(int iterations)
+        public Team Evolve(int iterations)
         {
-            int deathZone = (int)(0.1 * _teams.Count);
-            for (int i =0; i < iterations; i++)
+            int deathZone = (int)(deletionCoef * _teams.Count);
+            for (int i =0; i < iterations && _teams.Count != 1; i++)
             {
                 
                 foreach (var team in _teams)
                 {
                     if(_random.NextDouble() < _mutateChance)
                     {
-                        team.Mutate();
+                        team.Mutate(_playerCount);
+                        _playerCount++;
                     }
                 }
                 foreach (var team in _teams)
@@ -58,6 +89,7 @@ namespace Algorithm
 
                 //kill the worst
                 _teams.RemoveRange(0, deathZone);
+                deathZone = (int)(deletionCoef * _teams.Count);
                 //breed the best
                 for(int j = 0; j < deathZone; j++)
                 {
@@ -67,9 +99,16 @@ namespace Algorithm
                     {
                         teamB = (teamB + 1) % deathZone;
                     }
-                    _teams.Add(CrossOver(_teams[teamA], _teams[teamB]));
+
+                    var team = CrossOver(_teams[teamA], _teams[teamB]);
+                    if (team != null)
+                    {
+                        _teams.Add(team);
+                    }
                 }
+                Console.WriteLine("Teams Left : {0}", _teams.Count);
             }
+            _teams.Sort();
             return _teams[_teams.Count -1];
         }
     }

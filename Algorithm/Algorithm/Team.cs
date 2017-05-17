@@ -18,7 +18,7 @@ namespace Algorithm
         public Player[] Players { get { return _players; } }
         public int Fitness { get { return _fitness; } set { _fitness = value; } }
         //creating a new team with random players
-        public Team(Random random, int teamSize, int budget)
+        public Team(Random random, int teamSize, int budget, ref long playerCounter)
         {
             int cost = budget + 1;
             while (cost > budget)
@@ -27,7 +27,8 @@ namespace Algorithm
                 _players = new Player[teamSize];
                 for (int i = 0; i < teamSize; i++)
                 {
-                    _players[i] = new Player(random);
+                    _players[i] = new Player(random, playerCounter, i);
+                    playerCounter++;
                     cost += _players[i].Cost;
                 }
             }
@@ -61,10 +62,10 @@ namespace Algorithm
             _random = rnd;
         }
 
-        public void Mutate()
+        public void Mutate(long playerCount)
         {
-            int index = _random.Next(0, _players.Length - 1);
-            var player = new Player(_random);
+            int index = _random.Next(0, _players.Length);
+            var player = new Player(_random, playerCount, index);
             _cost -= _players[index].Cost;
             _players[index] = player;
             _cost += _players[index].Cost;
