@@ -19,13 +19,17 @@ namespace Algorithm
             //      mutate to create new teams
             //      remove y worst teams
             //      insert best new teams
-            int populationSize = 50000;
+            string csvFilePath = "../../../../Documentation/playerPopulation.csv";
+            CsvReader reader = new CsvReader();
+            List<List<Player>> playerPopulation = reader.ReadCsv(csvFilePath);
+            int populationSize = 5000;
             int teamSize = 11;
             int budget = 55000;
             double mutationChance = 0.02;
             int iterationCount = 100;
             Random random = new Random();
-            Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
+            //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
+            Population population = new Population(populationSize, playerPopulation, random, teamSize, budget, mutationChance);
             Console.WriteLine("Population : {0}",populationSize);
             Console.WriteLine("Teams : {0}", teamSize);
             Console.WriteLine("Budget : {0}", budget);
@@ -37,6 +41,7 @@ namespace Algorithm
             {
                 Console.WriteLine("player of winning team has fitness {0} and cost {1}, id: {2}", winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
             }
+            Console.ReadLine();
         }
     }
 }

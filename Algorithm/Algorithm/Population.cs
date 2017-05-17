@@ -28,6 +28,18 @@ namespace Algorithm
             _budget = budget;
             _mutateChance = mutateChance;
         }
+        public Population(int initialPopulation, List<List<Player>> playerPopulation, Random random, int teamSize, int budget, double mutateChance)
+        {
+            _teams = new List<Team>();
+            for (int i = 0; i < initialPopulation; i++)
+            {
+                _teams.Add(new Algorithm.Team(playerPopulation,random,teamSize,budget));
+            }
+            _random = random;
+            _teamSize = teamSize;
+            _budget = budget;
+            _mutateChance = mutateChance;
+        }
         private int GetSamePosition(int index)
         {
             int indexB = 0;
@@ -111,5 +123,7 @@ namespace Algorithm
             _teams.Sort();
             return _teams[_teams.Count -1];
         }
+
+
     }
 }

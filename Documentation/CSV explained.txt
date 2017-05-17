@@ -1,0 +1,41 @@
+the following categories explain the csv file each value is separated by comma
+rating
+card color
+first name last name
+position glossary => RW,LW,ST - napastnik; CM,LM,RM,CDM,CAM - pomocnicy; CB,RB,LB - obrona; GK - bramkarz
+club
+league 
+nation
+age 
+height	
+weight	
+pace	
+dribbling	
+shooting	
+defending	
+passing	physicality	
+acceleration	
+sprint speed	
+agility	balance	reactions	
+ball control	
+dribbling	
+positioning	
+finishing	
+shot power	
+long shots	
+volleys	penalties	
+interceptions	
+heading accuracy	
+marking	
+standing tackle	
+sliding tackle	
+vision	
+crossing	
+free kick accuracy	
+short passing	
+long passing	
+curve	
+jumping	
+stamina	
+strength	
+aggression

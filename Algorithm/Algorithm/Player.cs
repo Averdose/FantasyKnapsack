@@ -20,12 +20,25 @@ namespace Algorithm
         private int _shooting;
         private int _cost;
         private int _average;
-
+        public int Position { get { return _position; } }
         public long Id { get { return _id; } }
         public int Average { get { return _average; } set { _average = value; } }
         public int Cost { get { return _cost; } set { _cost = value; } }
         //this player will have random values of skills
         //in further version this data will be read from a file
+        public Player(long id, int speed, int dribbling, int defence, int passing, int shooting, int cost, int position)
+        {
+            _id = id;
+            _speed = speed;
+            _dribbling = dribbling;
+            _defence = defence;
+            _passing = passing;
+            _shooting = shooting;
+            _cost = cost;
+            _position = position;
+            _average = 0;
+            CalculateAverage();
+        }
         public Player(Random random, long id, int position)
         {
             _position = position;

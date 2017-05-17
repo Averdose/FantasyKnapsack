@@ -18,6 +18,27 @@ namespace Algorithm
         public Player[] Players { get { return _players; } }
         public int Fitness { get { return _fitness; } set { _fitness = value; } }
         //creating a new team with random players
+        public Team(List<List<Player>> playerPopulation, Random random, int teamSize, int budget)
+        {
+            int cost = budget + 1;
+            while (cost > budget)
+            {
+                cost = 0;
+                _players = new Player[teamSize];
+                for (int i = 0; i < teamSize; i++)
+                {
+                    _players[i] = GetPlayerAtGoodPosition(playerPopulation, i, random);
+                    cost += _players[i].Cost;
+                }
+            }
+            _fitness = -1;
+            CalculateFitness();
+            _random = random;
+            _budget = budget;
+            _cost = cost;
+        }
+
+
         public Team(Random random, int teamSize, int budget, ref long playerCounter)
         {
             int cost = budget + 1;
@@ -102,6 +123,26 @@ namespace Algorithm
             else
             {
                 return 0;
+            }
+        }
+
+        private Player GetPlayerAtGoodPosition (List<List<Player>> playerPopulation, int position, Random random)
+        {
+            if (position == 0)
+            {
+                return playerPopulation[0][random.Next(0, playerPopulation[0].Count)];
+            }
+            else if (position < 5)
+            {
+                return playerPopulation[1][random.Next(0, playerPopulation[1].Count)];
+            }
+            else if (position < 9)
+            {
+                return playerPopulation[2][random.Next(0, playerPopulation[2].Count)];
+            }
+            else
+            {
+                return playerPopulation[3][random.Next(0, playerPopulation[3].Count)];
             }
         }
     }
