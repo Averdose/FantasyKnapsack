@@ -1,0 +1,178 @@
+﻿<Window x:Class="FantasyKnapsack.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FantasyKnapsack"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1366" MinHeight="720">
+
+    <DockPanel>
+        <Grid Name="menuGrid" Height="auto" Width="auto" DockPanel.Dock="Top">
+            <Menu Background="#121212" Foreground="White">
+                <MenuItem Header="New" />
+                <MenuItem Header="Load" />
+                <MenuItem Header="Exit" />
+            </Menu>
+        </Grid>
+        <Grid Name="controlGrid" Height="100" Width="auto" DockPanel.Dock="Bottom" Background="#282828">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid Name="winningTeamGrid" Grid.Column="0" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Name="imageOfWinningTeam" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="0,0,0,0" Source="Icons/pause_96px.png" Stretch="Uniform"/>
+                <Label Name="nameOfWinningTeam" Grid.Row="0" Grid.Column="1" Content="Team X" Foreground="White"/>
+                <StackPanel Name="statsOfWinningTeam" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5">
+                    <Label Content="95" Foreground="#b9b9b9"/>
+                    <Label Content="/" Foreground="#b9b9b9"/>
+                    <Label Content="600000" Foreground="#b9b9b9"/>
+                    <Label Content="/" Foreground="#b9b9b9"/>
+                    <Label Content="97" Foreground="#b9b9b9"/>
+                </StackPanel>
+            </Grid>
+            <Grid Name="playGrid" Grid.Column="1" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Button Name="playButton" Grid.Row="0" Margin="0,0,0,0" Background="#282828" BorderThickness="0">
+                    <Image Name="playImage" Source="Icons/play_96px.png" Stretch="Uniform"/>
+                </Button>
+                <StackPanel Name="iterationsToSkip" Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,5">
+                    <Label Content="Number of operations to skip: " Foreground="#b9b9b9"/>
+                    <TextBox Width="60" Height="auto" Background="#b9b9b9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+            <Grid Name="statusGrid" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="STATUS" Foreground="#b9b9b9" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"/>
+                <Label Grid.Row="1" Content="Iteration number: 7543" Foreground="#b9b9b9" HorizontalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <Grid Name="setupGrid" Height="auto" Width="200" DockPanel.Dock="Left" Background="#121212">
+            <DockPanel LastChildFill="False" UseLayoutRounding="True">
+                <Grid Name="initialStateGrid" DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="INITIAL STATE" Foreground="White"/>
+                    <Label Grid.Row="1" Content="Size of the population" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <Label Grid.Row="3" Content="Budget" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="HOW MANY" Foreground="White"/>
+                    <Label Grid.Row="1" Content="Best teams to cross-over" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <Label Grid.Row="3" Content="Worst teams to cross-over" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="PER TEAM" Foreground="White"/>
+                    <Label Grid.Row="1" Content="Mutations number" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <Label Grid.Row="3" Content="Crossovers number" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="STOP AFTER" Foreground="White"/>
+                    <Label Grid.Row="1" Content="Number of iterations" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <Label Grid.Row="3" Content="Fitness threshold" Foreground="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                    <StackPanel Grid.Row="5" Orientation="Horizontal">
+                        <RadioButton GroupName="stopCondition" Content="AND" Foreground="#b9b9b9"  Margin="0,10,25,0" IsChecked="True"/>
+                        <RadioButton GroupName="stopCondition" Content="OR"  Foreground="#b9b9b9"  Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </DockPanel>
+        </Grid>
+        <Grid Name="activeTeamGrid" Height="auto" Width="300" DockPanel.Dock="Right" Background="#121212">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Name="activeTeam" Orientation="Horizontal" Grid.Row="0" Margin="0,15,0,0">
+                    <Image Grid.Column="0" Source="Icons/pause_96px.png" Stretch="Uniform" HorizontalAlignment="Left" MaxHeight="30"/>
+                    <Label Content="600000" Foreground="#b9b9b9"/>
+                    <Label Content="/" Foreground="#b9b9b9"/>
+                    <Label Content="600000" Foreground="#b9b9b9"/>
+                    <Label Content="/" Foreground="#b9b9b9"/>
+                    <Label Content="97" Foreground="#b9b9b9"/>
+                </StackPanel>
+                <StackPanel Name="activeTea" Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,15">
+                    <Label Content="600000" Foreground="#b9b9b9"/>
+                    <Label Content="/" Foreground="#b9b9b9"/>
+                    <Label Content="600000" Foreground="#b9b9b9"/>
+                    <Label Content="/" Foreground="#b9b9b9"/>
+                    <Label Content="97" Foreground="#b9b9b9"/>
+                </StackPanel>
+            </Grid>
+            <ListBox Name="listBoxSearchPatient"  Grid.Row="1"
+                 BorderBrush="#121212" Foreground="#FF484848" Background="#121212" 
+                 ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding SelectedPatient}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="../Icons/Add User Male_64px.png" Stretch="Uniform" HorizontalAlignment="Left" MaxHeight="30"/>
+                            <Label Grid.Column="1" Content="{Binding Name}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="2" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Name="teamsGrid" Height="auto" Width="auto" DockPanel.Dock="Left" Background="#FFF9F9BB"/>
+    </DockPanel>
+</Window>
