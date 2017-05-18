@@ -1,7 +1,8 @@
 the following categories explain the csv file each value is separated by comma
 rating
 card color
-first name last name
+first name
+last name
 position glossary => RW,LW,ST - napastnik; CM,LM,RM,CDM,CAM - pomocnicy; CB,RB,LB - obrona; GK - bramkarz
 club
 league 
