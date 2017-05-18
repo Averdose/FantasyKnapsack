@@ -39,6 +39,7 @@ namespace Algorithm
             _teamSize = teamSize;
             _budget = budget;
             _mutateChance = mutateChance;
+            _playerCount = playerPopulation[0].Count + playerPopulation[1].Count + playerPopulation[2].Count + playerPopulation[3].Count;
         }
         private int GetSamePosition(int index)
         {
@@ -78,7 +79,7 @@ namespace Algorithm
             return new Team(teamA.Players, indexA, player, _random, _teamSize, _budget);
         }
 
-        public Team Evolve(int iterations)
+        public Team Evolve(int iterations, List<List<Player>> playerPopulation)
         {
             int deathZone = (int)(deletionCoef * _teams.Count);
             for (int i =0; i < iterations && _teams.Count != 1; i++)
@@ -88,7 +89,7 @@ namespace Algorithm
                 {
                     if(_random.NextDouble() < _mutateChance)
                     {
-                        team.Mutate(_playerCount);
+                        team.Mutate(playerPopulation);
                         _playerCount++;
                     }
                 }

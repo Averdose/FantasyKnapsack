@@ -35,13 +35,33 @@ namespace Algorithm
             Console.WriteLine("Budget : {0}", budget);
             Console.WriteLine("Mutation chance : {0}", mutationChance);
             Console.WriteLine("Iterations count : {0}", iterationCount);
-            Team winner = population.Evolve(iterationCount);
+            Team winner = population.Evolve(iterationCount, playerPopulation);
             Console.WriteLine("the winners fitness is {0} and cost is {1}", winner.Fitness, winner.Cost);
-            for (int i =0; i< winner.Players.Length; i++)
-            {
-                Console.WriteLine("player of winning team has fitness {0} and cost {1}, id: {2}", winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
-            }
+            ListWinnerTeam(winner);
             Console.ReadLine();
+        }
+
+        private static void ListWinnerTeam(Team winner)
+        {
+            for (int i = 0; i < winner.Players.Length; i++)
+            {
+                if (i == 0)
+                {
+                    Console.WriteLine("Goalkeeper: {0} {1} has fitness {2} and cost {3} and id {4}", winner.Players[i].Name, winner.Players[i].Surname, winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
+                }
+                else if (i < 5)
+                {
+                    Console.WriteLine("Defence: {0} {1} has fitness {2} and cost {3}  id {4}", winner.Players[i].Name, winner.Players[i].Surname, winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
+                }
+                else if (i < 9)
+                {
+                    Console.WriteLine("Midfield: {0} {1} has fitness {2} and cost {3}  id {4}", winner.Players[i].Name, winner.Players[i].Surname, winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
+                }
+                else
+                {
+                    Console.WriteLine("Attack: {0} {1} has fitness {2} and cost {3}  id {4}", winner.Players[i].Name, winner.Players[i].Surname, winner.Players[i].Average, winner.Players[i].Cost, winner.Players[i].Id);
+                }
+            }
         }
     }
 }

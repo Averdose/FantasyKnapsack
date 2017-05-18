@@ -38,7 +38,9 @@ namespace Algorithm
                         , shooting = int.Parse(values[12])
                         , defence = int.Parse(values[13])
                         , passing = int.Parse(values[14]);
-                        Player newPlayer = new Player(lineCount - 1, speed, dribbling, defence, passing, shooting, cost, position);
+                        string name = values[2]
+                        , surname = values[3];
+                        Player newPlayer = new Player(lineCount - 1, speed, dribbling, defence, passing, shooting, cost, position, name, surname);
                         /*   structure of the csv file    */
                         //3 length + rng
                         //4 indeks position

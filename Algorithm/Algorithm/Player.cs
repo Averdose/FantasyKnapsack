@@ -20,13 +20,17 @@ namespace Algorithm
         private int _shooting;
         private int _cost;
         private int _average;
+        private string _name;
+        private string _surname;
+        public string Name { get { return _name; } }
+        public string Surname { get { return _surname; } }
         public int Position { get { return _position; } }
         public long Id { get { return _id; } }
         public int Average { get { return _average; } set { _average = value; } }
         public int Cost { get { return _cost; } set { _cost = value; } }
         //this player will have random values of skills
         //in further version this data will be read from a file
-        public Player(long id, int speed, int dribbling, int defence, int passing, int shooting, int cost, int position)
+        public Player(long id, int speed, int dribbling, int defence, int passing, int shooting, int cost, int position, string name, string surname)
         {
             _id = id;
             _speed = speed;
@@ -36,6 +40,8 @@ namespace Algorithm
             _shooting = shooting;
             _cost = cost;
             _position = position;
+            _name = name;
+            _surname = surname;
             _average = 0;
             CalculateAverage();
         }
@@ -49,6 +55,8 @@ namespace Algorithm
             _passing = random.Next(0, 100);
             _shooting = random.Next(0, 100);
             _cost = random.Next(2000, 8000);
+            _name = id.ToString();
+            _surname = id.ToString() + "surname";
             _average = 0;
             CalculateAverage();
         }

@@ -95,6 +95,27 @@ namespace Algorithm
                 _fitness = 0;
             }
         }
+        public void Mutate(List<List<Player>> playerPopulation)
+        {
+            int index = _random.Next(0, _players.Length);
+            int listNumber = GetPlayerListIndex(index);
+            bool flag = true;
+            Player newPlayer = new Player();
+            while (flag)
+            {
+                int randomPlayer = _random.Next(0, playerPopulation[listNumber].Count);
+                newPlayer = playerPopulation[listNumber][randomPlayer];
+                if (!Players.Any(p => p.Id == newPlayer.Id))
+                    flag = false;
+            }
+            _cost -= _players[index].Cost;
+            _players[index] = newPlayer;
+            _cost += _players[index].Cost;
+            if (_cost > _budget)
+            {
+                _fitness = 0;
+            }
+        }
 
         public void CalculateFitness()
         {
@@ -143,6 +164,26 @@ namespace Algorithm
             else
             {
                 return playerPopulation[3][random.Next(0, playerPopulation[3].Count)];
+            }
+        }
+
+        private int GetPlayerListIndex(int position)
+        {
+            if (position == 0)
+            {
+                return 0;
+            }
+            else if (position < 5)
+            {
+                return 1;
+            }
+            else if (position < 9)
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
             }
         }
     }
