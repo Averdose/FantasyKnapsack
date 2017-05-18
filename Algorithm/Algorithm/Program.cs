@@ -24,9 +24,9 @@ namespace Algorithm
             List<List<Player>> playerPopulation = reader.ReadCsv(csvFilePath);
             int populationSize = 5000;
             int teamSize = 11;
-            int budget = 55000;
+            int budget = 15000;
             double mutationChance = 0.02;
-            int iterationCount = 100;
+            int iterationCount = 400;
             Random random = new Random();
             //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
             Population population = new Population(populationSize, playerPopulation, random, teamSize, budget, mutationChance);
