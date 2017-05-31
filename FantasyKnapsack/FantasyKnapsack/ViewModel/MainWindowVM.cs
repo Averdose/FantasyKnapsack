@@ -157,10 +157,11 @@ namespace FantasyKnapsack.ViewModel
             }
             Random random = new Random();
             //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
-            Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber);
+            Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber, StartState.BestTeamsToCrossOver);
             ChoosenTeam = WinningTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
             TeamsList.Clear();
-            foreach(var team in population.Teams)
+            var list = population.Teams.Skip(population.Teams.Count - 20).OrderByDescending(n => n.Fitness);
+            foreach(var team in list)
             {
                 TeamsList.Add(team);
             }
@@ -170,6 +171,7 @@ namespace FantasyKnapsack.ViewModel
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".csv";
+            dlg.Filter = "CSV Files | *.csv";
             string csvFilePath = "";
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)

@@ -29,21 +29,9 @@ namespace FantasyKnapsack
             }
         }
 
-        public Population(int initialPopulation, Random random, int teamSize, int budget, double mutateChance)
+        public Population(int initialPopulation, List<List<Player>> playerPopulation, Random random, int teamSize, int budget, double mutateChance, double deathRate)
         {
-            _teams = new List<Team>();
-            _playerCount = 0;
-            for(int i = 0; i < initialPopulation; i++)
-            {
-                _teams.Add(new Team(random, teamSize, budget, ref _playerCount));
-            }
-            _random = random;
-            _teamSize = teamSize;
-            _budget = budget;
-            _mutateChance = mutateChance;
-        }
-        public Population(int initialPopulation, List<List<Player>> playerPopulation, Random random, int teamSize, int budget, double mutateChance)
-        {
+            this.deletionCoef = deathRate;
             _teams = new List<Team>();
             for (int i = 0; i < initialPopulation; i++)
             {

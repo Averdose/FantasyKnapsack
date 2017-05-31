@@ -12,9 +12,8 @@ namespace FantasyKnapsack.Model
 
         private int _sizeOfPopulation;
         private int _budget;
-        private int _bestTeamsToCrossOver;
-        private int _worstTeamToReject;
-        private int _mutationsNumber;
+        private double _bestTeamsToCrossOver;
+        private double _mutationsNumber;
         private int _crossoversNumber;
         private int _iterationsNumber;
         private int _fitnessThreshold;
@@ -49,7 +48,7 @@ namespace FantasyKnapsack.Model
             }
         }
 
-        public int BestTeamsToCrossOver
+        public double BestTeamsToCrossOver
         {
             get
             {
@@ -62,20 +61,7 @@ namespace FantasyKnapsack.Model
             }
         }
 
-        public int WorstTeamToReject
-        {
-            get
-            {
-                return _worstTeamToReject;
-            }
-
-            set
-            {
-                _worstTeamToReject = value;
-            }
-        }
-
-        public int MutationsNumber
+        public double MutationsNumber
         {
             get
             {
@@ -147,9 +133,8 @@ namespace FantasyKnapsack.Model
         {
             SizeOfPopulation = 3000;
             Budget = 12000;
-            BestTeamsToCrossOver = 20;
-            WorstTeamToReject = 20;
-            MutationsNumber = 10;
+            BestTeamsToCrossOver = 0.05;
+            MutationsNumber = 0.01;
             CrossoversNumber = 10;
             IterationsNumber = 100;
             FitnessThreshold = 90;
