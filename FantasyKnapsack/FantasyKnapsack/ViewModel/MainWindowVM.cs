@@ -154,7 +154,7 @@ namespace FantasyKnapsack.ViewModel
             Random random = new Random();
             //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
             Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber);
-            population.Evolve(StartState.IterationsNumber, playerPopulation);
+            ChoosenTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
             TeamsList.Clear();
             foreach(var team in population.Teams)
             {

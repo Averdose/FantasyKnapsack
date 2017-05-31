@@ -151,7 +151,7 @@ namespace FantasyKnapsack.Model
             WorstTeamToReject = 20;
             MutationsNumber = 10;
             CrossoversNumber = 10;
-            IterationsNumber = 10000;
+            IterationsNumber = 100;
             FitnessThreshold = 90;
             CheckBothConditions = false;
         }
