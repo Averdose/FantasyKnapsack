@@ -33,12 +33,6 @@
                     <ColumnDefinition Width="15"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="nameOfWinningTeam" Grid.Row="0" Grid.Column="1" Content="Winning Team" Foreground="White"/>
-                <StackPanel Name="statsOfWinningTeam" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5">
-                    <Label Content="{Binding Path=WinningTeam.Cost}" Foreground="#b9b9b9"/>
-                    <Label Content="/" Foreground="#b9b9b9"/>
-                    <Label Content="{Binding Path=WinningTeam.Fitness}" Foreground="#b9b9b9"/>
-                </StackPanel>
             </Grid>
             <Grid Name="playGrid" Grid.Column="1" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -116,7 +110,7 @@
                 </Grid>
             </DockPanel>
         </Grid>
-        <Grid Name="activeTeamGrid" Height="auto" Width="300" DockPanel.Dock="Right" Background="#121212">
+        <Grid Name="activeTeamGrid" Height="auto" Width="600" DockPanel.Dock="Right" Background="#121212">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -146,7 +140,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <ListBox  Grid.Row="1"
+            <ListBox  Grid.Row="1" Width="600"
                  BorderBrush="#121212" Foreground="#FF484848" Background="#121212"
                  ItemsSource="{Binding ChoosenTeam.Players, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
@@ -206,7 +200,7 @@
                                 <Label Grid.Column="4" Content="{Binding Passing}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
                                 <Label Grid.Column="5" Content="{Binding Shooting}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
                             </Grid>
-                            <Grid Grid.Row="3" Background="#b9b9b9"/>
+                            <Grid Grid.Row="3" Background="#b9b9b9" Width="565"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -240,16 +234,14 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="250"/>
                                 <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Team" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="4" Content="{Binding Cost}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="6" Content="{Binding Fitness}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="2" Content="{Binding Cost}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="4" Content="{Binding Fitness}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
