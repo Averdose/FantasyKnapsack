@@ -144,7 +144,7 @@ namespace FantasyKnapsack.ViewModel
             WinningTeam = new Team();
             TeamsList = new BindableCollection<Team>();
             StartAlgorithmCommand = new AsyncRelayCommand(execute => ControlAlgorithm(), canExecute => true);
-            LoadCommand = new AsyncRelayCommand(execute => Load(), canExecute => true)
+            LoadCommand = new AsyncRelayCommand(execute => Load(), canExecute => true);
         }
 
         private async Task ControlAlgorithm()
