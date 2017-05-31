@@ -151,10 +151,14 @@ namespace FantasyKnapsack.ViewModel
 
         private async Task ControlAlgorithm()
         {
+            if(playerPopulation.Count == 0)
+            {
+                Load();
+            }
             Random random = new Random();
             //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
             Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber);
-            ChoosenTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
+            ChoosenTeam = WinningTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
             TeamsList.Clear();
             foreach(var team in population.Teams)
             {
@@ -173,7 +177,11 @@ namespace FantasyKnapsack.ViewModel
                 csvFilePath = dlg.FileName;
             }
             CsvReader reader = new CsvReader();
-            playerPopulation = reader.ReadCsv(csvFilePath);
+            try
+            {
+                playerPopulation = reader.ReadCsv(csvFilePath);
+            }catch(Exception e)
+            { }
         }
     }
 }
