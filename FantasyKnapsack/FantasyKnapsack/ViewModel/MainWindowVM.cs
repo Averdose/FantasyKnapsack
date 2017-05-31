@@ -21,6 +21,7 @@ namespace FantasyKnapsack.ViewModel
         private AsyncRelayCommand _startAlgorithmCommand;
         private AsyncRelayCommand _loadCommand;
 
+        List<List<Player>> playerPopulation;
         private string _currentStatus;
         private int _currentIteration;
 
@@ -139,22 +140,40 @@ namespace FantasyKnapsack.ViewModel
         {
             CurrentStatus = "PAUSED";
             CurrentIteration = 0;
+            playerPopulation = new List<List<Player>>();
             StartState = new InitialState();
             ChoosenTeam = null;
             WinningTeam = null;
             TeamsList = new BindableCollection<Team>();
             StartAlgorithmCommand = new AsyncRelayCommand(execute => ControlAlgorithm(), canExecute => true);
-            LoadCommand = new AsyncRelayCommand(execute => Load(), canExecute => true)
+            LoadCommand = new AsyncRelayCommand(execute => Load(), canExecute => true);
         }
 
         private async Task ControlAlgorithm()
         {
-
+            Random random = new Random();
+            //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
+            Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber);
+            population.Evolve(StartState.IterationsNumber, playerPopulation);
+            TeamsList.Clear();
+            foreach(var team in population.Teams)
+            {
+                TeamsList.Add(team);
+            }
         }
 
         private async Task Load()
         {
-
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".csv";
+            string csvFilePath = "";
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                csvFilePath = dlg.FileName;
+            }
+            CsvReader reader = new CsvReader();
+            playerPopulation = reader.ReadCsv(csvFilePath);
         }
     }
 }

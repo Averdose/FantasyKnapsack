@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FantasyKnapsack
 {
-    public class Population
+    public class Population 
     {
         private double deletionCoef = 0.05;
         private long _playerCount;
@@ -15,6 +15,20 @@ namespace FantasyKnapsack
         private List<Team> _teams;
         private readonly int _teamSize;
         private Random _random;
+
+        public List<Team> Teams
+        {
+            get
+            {
+                return _teams;
+            }
+
+            set
+            {
+                _teams = value;
+            }
+        }
+
         public Population(int initialPopulation, Random random, int teamSize, int budget, double mutateChance)
         {
             _teams = new List<Team>();
