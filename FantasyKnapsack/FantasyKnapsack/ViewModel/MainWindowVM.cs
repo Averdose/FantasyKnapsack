@@ -19,8 +19,7 @@ namespace FantasyKnapsack.ViewModel
         private InitialState _startState;
 
         private AsyncRelayCommand _startAlgorithmCommand;
-        private AsyncRelayCommand _showBestCommand;
-        private AsyncRelayCommand _showWorstCommand;
+        private AsyncRelayCommand _loadCommand;
 
         private string _currentStatus;
         private int _currentIteration;
@@ -93,32 +92,6 @@ namespace FantasyKnapsack.ViewModel
             }
         }
 
-        public AsyncRelayCommand ShowBestCommand
-        {
-            get
-            {
-                return _showBestCommand;
-            }
-
-            set
-            {
-                _showBestCommand = value;
-            }
-        }
-
-        public AsyncRelayCommand ShowWorstCommand
-        {
-            get
-            {
-                return _showWorstCommand;
-            }
-
-            set
-            {
-                _showWorstCommand = value;
-            }
-        }
-
         public string CurrentStatus
         {
             get
@@ -145,6 +118,19 @@ namespace FantasyKnapsack.ViewModel
             }
         }
 
+        public AsyncRelayCommand LoadCommand
+        {
+            get
+            {
+                return _loadCommand;
+            }
+
+            set
+            {
+                _loadCommand = value;
+            }
+        }
+
         #endregion
 
 
@@ -158,6 +144,7 @@ namespace FantasyKnapsack.ViewModel
             WinningTeam = null;
             TeamsList = new BindableCollection<Team>();
             StartAlgorithmCommand = new AsyncRelayCommand(execute => ControlAlgorithm(), canExecute => true);
+            LoadCommand = new AsyncRelayCommand(execute => Load(), canExecute => true)
         }
 
         private async Task ControlAlgorithm()
@@ -165,5 +152,9 @@ namespace FantasyKnapsack.ViewModel
 
         }
 
+        private async Task Load()
+        {
+
+        }
     }
 }

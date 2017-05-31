@@ -15,9 +15,7 @@
     <DockPanel>
         <Grid Name="menuGrid" Height="auto" Width="auto" DockPanel.Dock="Top">
             <Menu Background="#121212" Foreground="White">
-                <MenuItem Header="New" />
-                <MenuItem Header="Load" />
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Load" Command="{Binding LoadCommand}"/>
             </Menu>
         </Grid>
         <Grid Name="controlGrid" Height="100" Width="auto" DockPanel.Dock="Bottom" Background="#282828">
@@ -35,11 +33,11 @@
                     <ColumnDefinition Width="15"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="nameOfWinningTeam" Grid.Row="0" Grid.Column="1" Content="Team X" Foreground="White"/>
+                <Label Name="nameOfWinningTeam" Grid.Row="0" Grid.Column="1" Content="Winning Team" Foreground="White"/>
                 <StackPanel Name="statsOfWinningTeam" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5">
-                    <Label Content="600000" Foreground="#b9b9b9"/>
+                    <Label Content="{Binding Path=WinningTeam.Cost}" Foreground="#b9b9b9"/>
                     <Label Content="/" Foreground="#b9b9b9"/>
-                    <Label Content="97" Foreground="#b9b9b9"/>
+                    <Label Content="{Binding Path=WinningTeam.Fitness}" Foreground="#b9b9b9"/>
                 </StackPanel>
             </Grid>
             <Grid Name="playGrid" Grid.Column="1" HorizontalAlignment="Center">
@@ -47,7 +45,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Button Name="playButton" Grid.Row="0" Margin="0,0,0,0" Background="#282828" BorderThickness="0">
+                <Button Name="playButton" Grid.Row="0" Margin="0,0,0,0" Background="#282828" BorderThickness="0" Command="{Binding StartAlgorithmCommand}">
                     <Image Name="playImage" Source="Icons/play_96px.png" Stretch="Uniform"/>
                 </Button>
             </Grid>
@@ -87,7 +85,7 @@
                     <Label Grid.Row="0" Content="HOW MANY" Foreground="White"/>
                     <Label Grid.Row="1" Content="Best teams to cross-over" Foreground="#b9b9b9"/>
                     <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.BestTeamsToCrossOver, Mode=TwoWay}"/>
-                    <Label Grid.Row="3" Content="Worst teams to cross-over" Foreground="#b9b9b9"/>
+                    <Label Grid.Row="3" Content="Worst teams to reject" Foreground="#b9b9b9"/>
                     <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.WorstTeamToReject, Mode=TwoWay}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
@@ -186,67 +184,11 @@
                         </Grid>
                         <Grid Grid.Row="3" Background="#b9b9b9"/>
                     </Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="1"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="1" Content="2. " Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                            <Label Grid.Column="2" Content="Mistiano" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                            <Label Grid.Column="3" Content="Slonialdo" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                            <Label Grid.Column="4" Content="93" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
-                            <Label Grid.Column="5" Content="6000 $" Foreground="#b9b9b9" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="1" Content="SPE" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="2" Content="DRI" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="3" Content="DEF" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="4" Content="PAS" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="5" Content="SHO" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="1" Content="87" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="2" Content="45" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="3" Content="82" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="4" Content="36" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="5" Content="92" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                        </Grid>
-                        <Grid Grid.Row="3" Background="#b9b9b9"/>
-                    </Grid>
                 </StackPanel>
             </Grid>
             <ListBox  Grid.Row="1"
-                 BorderBrush="#121212" Foreground="#FF484848" Background="#121212">
+                 BorderBrush="#121212" Foreground="#FF484848" Background="#121212"
+                 ItemsSource="{Binding TeamsList, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -254,7 +196,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
@@ -266,11 +208,11 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="15"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="1" Content="1. " Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                                <Label Grid.Column="2" Content="Mikolaj" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                                <Label Grid.Column="3" Content="Slon" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                                <Label Grid.Column="4" Content="85" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
-                                <Label Grid.Column="5" Content="9000 $" Foreground="#b9b9b9" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
+                                <Label Grid.Column="1" Content="{Binding Position}" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                                <Label Grid.Column="2" Content="{Binding Name}" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                                <Label Grid.Column="3" Content="{Binding Surname}" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                                <Label Grid.Column="4" Content="{Binding Average}" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
+                                <Label Grid.Column="5" Content="{Binding Cost}" Foreground="#b9b9b9" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -298,12 +240,13 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="15"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="1" Content="85" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                                <Label Grid.Column="2" Content="45" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                                <Label Grid.Column="3" Content="85" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                                <Label Grid.Column="4" Content="97" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
-                                <Label Grid.Column="5" Content="34" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding Speed}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                                <Label Grid.Column="2" Content="{Binding Dribbling}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                                <Label Grid.Column="3" Content="{Binding Defence}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                                <Label Grid.Column="4" Content="{Binding Passing}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                                <Label Grid.Column="5" Content="{Binding Shooting}" Foreground="#b9b9b9" Margin="0,0,0,0" HorizontalAlignment="Center"/>
                             </Grid>
+                            <Grid Grid.Row="3" Background="#b9b9b9"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -329,7 +272,9 @@
                 <Label Grid.Column="4" Content="Value" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
                 <Label Grid.Column="6" Content="Fitness" Foreground="#b9b9b9" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
             </Grid>
-            <ListBox Grid.Row="1" Background="#181818" Margin="15,0,15,0">
+            <ListBox Grid.Row="1" Background="#181818" Margin="15,0,15,0"
+                     ItemsSource="{Binding TeamsList, UpdateSourceTrigger=PropertyChanged}"
+                     SelectedItem="{Binding ChoosenTeam}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -342,10 +287,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="Something" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="2" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="4" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="6" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="0" Content="Team" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="4" Content="{Binding Cost}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="6" Content="{Binding Fitness}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
