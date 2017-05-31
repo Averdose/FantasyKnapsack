@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FantasyKnapsack.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace FantasyKnapsack
         public MainWindow()
         {
             InitializeComponent();
+            MainWindowVM context = new MainWindowVM();
+            DataContext = context;
+            Show();
         }
     }
 }

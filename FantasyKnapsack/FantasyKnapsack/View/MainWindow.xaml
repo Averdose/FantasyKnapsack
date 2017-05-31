@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:FantasyKnapsack.ViewModel"
         xmlns:local="clr-namespace:FantasyKnapsack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1366" MinHeight="720">
+        Title="Fantasy Knapsack" Height="720" Width="1366" MinHeight="720">
+
+    <!--<Window.Resources>
+        <vm:MainWindowVM x:Key="ViewModel"/>
+    </Window.Resources>-->
 
     <DockPanel>
         <Grid Name="menuGrid" Height="auto" Width="auto" DockPanel.Dock="Top">
@@ -74,9 +79,9 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="INITIAL STATE" Foreground="White"/>
                     <Label Grid.Row="1" Content="Size of the population" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.SizeOfPopulation, Mode=TwoWay}"/>
                     <Label Grid.Row="3" Content="Budget" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.Budget, Mode=TwoWay}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
                     <Grid.RowDefinitions>
@@ -88,9 +93,9 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="HOW MANY" Foreground="White"/>
                     <Label Grid.Row="1" Content="Best teams to cross-over" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.BestTeamsToCrossOver, Mode=TwoWay}"/>
                     <Label Grid.Row="3" Content="Worst teams to cross-over" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.WorstTeamToReject, Mode=TwoWay}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
                     <Grid.RowDefinitions>
@@ -102,9 +107,9 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="PER TEAM" Foreground="White"/>
                     <Label Grid.Row="1" Content="Mutations number" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.MutationsNumber, Mode=TwoWay}"/>
                     <Label Grid.Row="3" Content="Crossovers number" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.CrossoversNumber, Mode=TwoWay}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
                     <Grid.RowDefinitions>
@@ -117,9 +122,9 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="STOP AFTER" Foreground="White"/>
                     <Label Grid.Row="1" Content="Number of iterations" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="2" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.IterationsNumber, Mode=TwoWay}"/>
                     <Label Grid.Row="3" Content="Fitness threshold" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9"/>
+                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.FitnessThreshold, Mode=TwoWay}"/>
                     <StackPanel Grid.Row="5" Orientation="Horizontal">
                         <RadioButton GroupName="stopCondition" Content="AND" Foreground="#b9b9b9"  Margin="0,10,25,0" IsChecked="True"/>
                         <RadioButton GroupName="stopCondition" Content="OR"  Foreground="#b9b9b9"  Margin="0,10,0,0"/>
@@ -254,7 +259,7 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <ListBox Name="listBoxSearchPatient"  Grid.Row="1"
+            <ListBox  Grid.Row="1"
                  BorderBrush="#121212" Foreground="#FF484848" Background="#121212">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -318,6 +323,49 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Grid Name="teamsGrid" Height="auto" Width="auto" DockPanel.Dock="Left" Background="#FFF9F9BB"/>
+        <Grid Name="teamsGrid" Height="auto" Width="auto" DockPanel.Dock="Left" Background="#181818">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="15,15,15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Content="BEST " Foreground="#FFFFFF" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                <Label Grid.Column="2" Content="WORST" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                <Label Grid.Column="3" Content="Skill" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                <Label Grid.Column="4" Content="Value" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
+                <Label Grid.Column="6" Content="Fitness" Foreground="#b9b9b9" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
+            </Grid>
+            <ListBox Grid.Row="1" Background="#181818" Margin="15,0,15,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Something" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="2" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="4" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="6" Content="{Binding Surname}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </DockPanel>
 </Window>

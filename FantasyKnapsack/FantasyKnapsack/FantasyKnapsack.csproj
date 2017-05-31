@@ -63,6 +63,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\InitialState.cs" />
+    <Compile Include="Model\Team.cs" />
+    <Compile Include="Utilities\AsyncRelayCommand.cs" />
+    <Compile Include="Utilities\BindableBase.cs" />
+    <Compile Include="Utilities\BindableCollection.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
