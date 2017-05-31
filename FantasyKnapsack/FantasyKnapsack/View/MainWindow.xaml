@@ -32,14 +32,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="15"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Name="imageOfWinningTeam" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="0,0,0,0" Source="Icons/pause_96px.png" Stretch="Uniform"/>
                 <Label Name="nameOfWinningTeam" Grid.Row="0" Grid.Column="1" Content="Team X" Foreground="White"/>
                 <StackPanel Name="statsOfWinningTeam" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5">
-                    <Label Content="95" Foreground="#b9b9b9"/>
-                    <Label Content="/" Foreground="#b9b9b9"/>
                     <Label Content="600000" Foreground="#b9b9b9"/>
                     <Label Content="/" Foreground="#b9b9b9"/>
                     <Label Content="97" Foreground="#b9b9b9"/>
@@ -53,18 +50,14 @@
                 <Button Name="playButton" Grid.Row="0" Margin="0,0,0,0" Background="#282828" BorderThickness="0">
                     <Image Name="playImage" Source="Icons/play_96px.png" Stretch="Uniform"/>
                 </Button>
-                <StackPanel Name="iterationsToSkip" Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,5">
-                    <Label Content="Number of operations to skip: " Foreground="#b9b9b9"/>
-                    <TextBox Width="60" Height="auto" Background="#b9b9b9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
             </Grid>
             <Grid Name="statusGrid" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="STATUS" Foreground="#b9b9b9" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"/>
-                <Label Grid.Row="1" Content="Iteration number: 7543" Foreground="#b9b9b9" HorizontalAlignment="Center"/>
+                <Label Grid.Row="0" Content="{Binding Path=CurrentStatus}" Foreground="#b9b9b9" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"/>
+                <Label Grid.Row="1" Content="{Binding Path=CurrentIteration}" Foreground="#b9b9b9" HorizontalAlignment="Center"/>
             </Grid>
         </Grid>
         <Grid Name="setupGrid" Height="auto" Width="200" DockPanel.Dock="Left" Background="#121212">
@@ -108,8 +101,6 @@
                     <Label Grid.Row="0" Content="PER TEAM" Foreground="White"/>
                     <Label Grid.Row="1" Content="Mutations number" Foreground="#b9b9b9"/>
                     <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.MutationsNumber, Mode=TwoWay}"/>
-                    <Label Grid.Row="3" Content="Crossovers number" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.CrossoversNumber, Mode=TwoWay}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
                     <Grid.RowDefinitions>
@@ -123,12 +114,7 @@
                     <Label Grid.Row="0" Content="STOP AFTER" Foreground="White"/>
                     <Label Grid.Row="1" Content="Number of iterations" Foreground="#b9b9b9"/>
                     <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.IterationsNumber, Mode=TwoWay}"/>
-                    <Label Grid.Row="3" Content="Fitness threshold" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.FitnessThreshold, Mode=TwoWay}"/>
-                    <StackPanel Grid.Row="5" Orientation="Horizontal">
-                        <RadioButton GroupName="stopCondition" Content="AND" Foreground="#b9b9b9"  Margin="0,10,25,0" IsChecked="True"/>
-                        <RadioButton GroupName="stopCondition" Content="OR"  Foreground="#b9b9b9"  Margin="0,10,0,0"/>
-                    </StackPanel>
+                    <StackPanel Grid.Row="5" Orientation="Horizontal"/>
                 </Grid>
             </DockPanel>
         </Grid>
@@ -340,8 +326,6 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="1" Content="BEST " Foreground="#FFFFFF" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                <Label Grid.Column="2" Content="WORST" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
-                <Label Grid.Column="3" Content="Skill" Foreground="#b9b9b9" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
                 <Label Grid.Column="4" Content="Value" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
                 <Label Grid.Column="6" Content="Fitness" Foreground="#b9b9b9" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
             </Grid>

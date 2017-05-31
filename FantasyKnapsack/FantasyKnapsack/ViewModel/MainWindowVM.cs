@@ -22,6 +22,9 @@ namespace FantasyKnapsack.ViewModel
         private AsyncRelayCommand _showBestCommand;
         private AsyncRelayCommand _showWorstCommand;
 
+        private string _currentStatus;
+        private int _currentIteration;
+
         #endregion
 
         #region Getters&Setters
@@ -116,12 +119,40 @@ namespace FantasyKnapsack.ViewModel
             }
         }
 
+        public string CurrentStatus
+        {
+            get
+            {
+                return _currentStatus;
+            }
+
+            set
+            {
+                _currentStatus = value;
+            }
+        }
+
+        public int CurrentIteration
+        {
+            get
+            {
+                return _currentIteration;
+            }
+
+            set
+            {
+                _currentIteration = value;
+            }
+        }
+
         #endregion
 
 
 
         public MainWindowVM()
         {
+            CurrentStatus = "PAUSED";
+            CurrentIteration = 0;
             StartState = new InitialState();
             ChoosenTeam = new Team();
             WinningTeam = new Team();
