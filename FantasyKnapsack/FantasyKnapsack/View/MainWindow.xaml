@@ -48,8 +48,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="{Binding Path=CurrentStatus}" Foreground="#b9b9b9" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"/>
-                <Label Grid.Row="1" Content="{Binding Path=CurrentIteration}" Foreground="#b9b9b9" HorizontalAlignment="Center"/>
             </Grid>
         </Grid>
         <Grid Name="setupGrid" Height="auto" Width="200" DockPanel.Dock="Left" Background="#121212">
@@ -79,8 +77,6 @@
                     <Label Grid.Row="0" Content="HOW MANY" Foreground="White"/>
                     <Label Grid.Row="1" Content="Best teams to cross-over" Foreground="#b9b9b9"/>
                     <TextBox Grid.Row="2" Background="#b9b9b9" Text="{Binding Path=StartState.BestTeamsToCrossOver, Mode=TwoWay}"/>
-                    <Label Grid.Row="3" Content="Worst teams to reject" Foreground="#b9b9b9"/>
-                    <TextBox Grid.Row="4" Background="#b9b9b9" Text="{Binding Path=StartState.WorstTeamToReject, Mode=TwoWay}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Height="auto" Width="auto"  Margin="15,15,15,0">
                     <Grid.RowDefinitions>

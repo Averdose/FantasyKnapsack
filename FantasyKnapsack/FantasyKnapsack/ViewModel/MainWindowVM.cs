@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FantasyKnapsack.ViewModel
 {
-    public class MainWindowVM
+    public class MainWindowVM : BindableBase
     {
         #region Fields
 
@@ -38,6 +38,7 @@ namespace FantasyKnapsack.ViewModel
             set
             {
                 _choosenTeam = value;
+                Notify();
             }
         }
 
@@ -51,6 +52,7 @@ namespace FantasyKnapsack.ViewModel
             set
             {
                 _winningTeam = value;
+                Notify();
             }
         }
 
@@ -64,6 +66,7 @@ namespace FantasyKnapsack.ViewModel
             set
             {
                 _teamsList = value;
+                Notify();
             }
         }
 
@@ -77,6 +80,7 @@ namespace FantasyKnapsack.ViewModel
             set
             {
                 _startState = value;
+                Notify();
             }
         }
 
@@ -103,6 +107,7 @@ namespace FantasyKnapsack.ViewModel
             set
             {
                 _currentStatus = value;
+                Notify();
             }
         }
 
@@ -116,6 +121,7 @@ namespace FantasyKnapsack.ViewModel
             set
             {
                 _currentIteration = value;
+
             }
         }
 
@@ -138,7 +144,7 @@ namespace FantasyKnapsack.ViewModel
 
         public MainWindowVM()
         {
-            CurrentStatus = "PAUSED";
+            CurrentStatus = "WAITING...";
             CurrentIteration = 0;
             playerPopulation = new List<List<Player>>();
             StartState = new InitialState();
@@ -151,14 +157,13 @@ namespace FantasyKnapsack.ViewModel
 
         private async Task ControlAlgorithm()
         {
-            if(playerPopulation.Count == 0)
+            if (playerPopulation.Count == 0)
             {
                 Load();
             }
             Random random = new Random();
-            //Population population = new Population(populationSize, random, teamSize, budget, mutationChance);
             Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber, StartState.BestTeamsToCrossOver);
-            ChoosenTeam = WinningTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
+            ChoosenTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
             TeamsList.Clear();
             var list = population.Teams.Skip(population.Teams.Count - 20).OrderByDescending(n => n.Fitness);
             foreach(var team in list)
