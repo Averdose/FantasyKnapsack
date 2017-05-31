@@ -63,7 +63,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\CsvReader.cs" />
     <Compile Include="Model\InitialState.cs" />
+    <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Population.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Utilities\AsyncRelayCommand.cs" />
     <Compile Include="Utilities\BindableBase.cs" />

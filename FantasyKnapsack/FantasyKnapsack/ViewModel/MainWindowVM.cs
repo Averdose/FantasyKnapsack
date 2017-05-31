@@ -154,8 +154,8 @@ namespace FantasyKnapsack.ViewModel
             CurrentStatus = "PAUSED";
             CurrentIteration = 0;
             StartState = new InitialState();
-            ChoosenTeam = new Team();
-            WinningTeam = new Team();
+            ChoosenTeam = null;
+            WinningTeam = null;
             TeamsList = new BindableCollection<Team>();
             StartAlgorithmCommand = new AsyncRelayCommand(execute => ControlAlgorithm(), canExecute => true);
         }
