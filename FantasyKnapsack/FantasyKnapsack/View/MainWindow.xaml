@@ -148,7 +148,7 @@
             </Grid>
             <ListBox  Grid.Row="1"
                  BorderBrush="#121212" Foreground="#FF484848" Background="#121212"
-                 ItemsSource="{Binding TeamsList, UpdateSourceTrigger=PropertyChanged}">
+                 ItemsSource="{Binding ChoosenTeam.Players, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
