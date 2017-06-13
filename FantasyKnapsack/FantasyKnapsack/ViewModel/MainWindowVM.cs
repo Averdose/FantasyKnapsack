@@ -15,6 +15,7 @@ namespace FantasyKnapsack.ViewModel
         private Team _choosenTeam;
         private Team _winningTeam;
         private BindableCollection<Team> _teamsList;
+        private BindableCollection<IterationFitness> _iterationFitnessList;
 
         private InitialState _startState;
 
@@ -138,6 +139,20 @@ namespace FantasyKnapsack.ViewModel
             }
         }
 
+        public BindableCollection<IterationFitness> IterationFitnessList
+        {
+            get
+            {
+                return _iterationFitnessList;
+            }
+
+            set
+            {
+                _iterationFitnessList = value;
+                Notify();
+            }
+        }
+
         #endregion
 
 
@@ -151,6 +166,7 @@ namespace FantasyKnapsack.ViewModel
             ChoosenTeam = null;
             WinningTeam = null;
             TeamsList = new BindableCollection<Team>();
+            IterationFitnessList = new BindableCollection<IterationFitness>();
             StartAlgorithmCommand = new AsyncRelayCommand(execute => ControlAlgorithm(), canExecute => true);
             LoadCommand = new AsyncRelayCommand(execute => Load(), canExecute => true);
         }
@@ -162,8 +178,9 @@ namespace FantasyKnapsack.ViewModel
                 Load();
             }
             Random random = new Random();
+            IterationFitnessList.Clear();
             Population population = new Population(StartState.SizeOfPopulation, playerPopulation, random, 11, StartState.Budget, StartState.MutationsNumber, StartState.BestTeamsToCrossOver);
-            ChoosenTeam = population.Evolve(StartState.IterationsNumber, playerPopulation);
+            ChoosenTeam = population.Evolve(StartState.IterationsNumber, playerPopulation, IterationFitnessList);
             TeamsList.Clear();
             var list = population.Teams.Skip(population.Teams.Count - 20).OrderByDescending(n => n.Fitness);
             foreach(var team in list)

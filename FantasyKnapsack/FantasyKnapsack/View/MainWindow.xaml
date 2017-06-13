@@ -202,7 +202,38 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Grid Name="teamsGrid" Height="auto" Width="auto" DockPanel.Dock="Left" Background="#181818">
+        <Grid Name="fitnessGrid" Height="auto" Width="auto" DockPanel.Dock="Left" Background="#181818">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="15,15,15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Iteration " Foreground="#FFFFFF" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                <Label Grid.Column="2" Content="Fitness" Foreground="#b9b9b9" HorizontalAlignment="Right"  FontSize="16" FontWeight="Bold"/>
+            </Grid>
+            <ListBox Grid.Row="1" Background="#181818" Margin="15,0,15,0"
+                     ItemsSource="{Binding IterationFitnessList, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding Iteration}" Foreground="#b9b9b9" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="2" Content="{Binding Fitness}" Foreground="#b9b9b9" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Name="teamsGrid" Height="auto" Width="auto" DockPanel.Dock="Right" Background="#181818">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -230,14 +261,14 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="120"/>
                                 <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="45"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="Team" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="2" Content="{Binding Cost}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
-                            <Label Grid.Column="4" Content="{Binding Fitness}" Foreground="#484848" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="0" Content="Team" Foreground="#b9b9b9" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="2" Content="{Binding Cost}" Foreground="#b9b9b9" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
+                            <Label Grid.Column="4" Content="{Binding Fitness}" Foreground="#b9b9b9" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

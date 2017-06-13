@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FantasyKnapsack.Model;
+using FantasyKnapsack.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -81,7 +83,7 @@ namespace FantasyKnapsack
             return new Team(teamA.Players, indexA, player, _random, _teamSize, _budget);
         }
 
-        public Team Evolve(int iterations, List<List<Player>> playerPopulation)
+        public Team Evolve(int iterations, List<List<Player>> playerPopulation, BindableCollection<IterationFitness> iterationFitnessList)
         {
             int deathZone = (int)(deletionCoef * _teams.Count);
             for (int i =0; i < iterations && _teams.Count != 1; i++)
@@ -101,7 +103,7 @@ namespace FantasyKnapsack
                 }
                 _teams.Sort();
                 Console.WriteLine("best fitness in iteration {0} is {1} with cost {2}", i, _teams[_teams.Count - 1].Fitness, _teams[_teams.Count - 1].Cost);
-
+                iterationFitnessList.Add(new IterationFitness(i, _teams[_teams.Count - 1].Fitness));
                 //kill the worst
                 _teams.RemoveRange(0, deathZone);
                 deathZone = (int)(deletionCoef * _teams.Count);
